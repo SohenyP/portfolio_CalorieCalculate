@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mvc는 beans:beans로 태그 변경해야 인식함 -->
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/beans
+                 		http://www.springframework.org/schema/beans/spring-beans.xsd
+                 		http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+                 		http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx.xsd
+                 		http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<!-- 스캔한 패키지 내부 클래스 중 @Controller 있는 클래스 controller로써 로딩하도록 설정 -->
+	<annotation-driven />
+
+	<!-- 스캔할 bean들이 모여있는 패키지 지정 -->
+	<context:component-scan base-package="pack.prjC.controller" />
+	<!-- MyBatis와 트랜잭션 제어를 위한 service 패키지 지정 -->
+	<context:component-scan base-package="pack.prjC.service" />
+
+	<!-- Controller의 메서드에서 반환하는 문자열 앞, 뒤에 붙일 경로 정보 셋팅 -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+
+	<!-- 정적파일(img, video, audio) 로드 설정 -->
+	<resources mapping="/**" location="/resources/" />
+	
+	
+</beans:beans>		

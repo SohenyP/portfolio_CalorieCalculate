@@ -1,0 +1,180 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>PrjC_CalorieCalculate_SPR_Java</groupId>
+	<artifactId>PrjC_CalorieCalculate_SPR_Java</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<!-- 소스의 디렉토리 구조, 빌드 산출물 디렉토리 구조, 빌드시 사용할 플러긴 정보 관리 -->
+	<build>
+		<!-- sourceDirectory : 자바 소스 코드를 관리하는 디렉토리 -->
+		<sourceDirectory>src/main/java</sourceDirectory>
+
+		<!-- Maven제공 기능은 플러긴 기반으로 작동 따라서 설정 필요 -->
+		<plugins>
+
+			<!-- 컴파일 플러그인 설정 -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<!-- 16>14변경 -->
+					<release>14</release>
+				</configuration>
+			</plugin>
+
+			<!-- 배포 패키징 플러긴 설정 -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<!-- configuration 추가 -->
+				<configuration>
+					<!-- 배포할 위치 directory -->
+					<warSourceDirectory>src</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- 라이브러리 버전관리 : properties -->
+	<properties>
+		<javax.servlet-version>4.0.1</javax.servlet-version>
+		<javax.servlet.jsp-version>2.3.3</javax.servlet.jsp-version>
+		<javax.servlet.jsp.jstl-version>1.2</javax.servlet.jsp.jstl-version>
+		<org.springframework>5.2.2.RELEASE</org.springframework>
+	</properties>
+
+	<!-- 라이브러리 셋팅 : dependencies 프로그램과 의존관계인 라이브러리 관리 -->
+	<dependencies>
+
+		<!-- servlet-api 라이브러리 적용 위한 설정 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<!-- 버전관리는 properties에서 하기 때문에 변수처럼 사용하기 -->
+			<version>${javax.servlet-version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- javax.servlet.jsp-api 라이브러리 적용 위한 설정 -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<!-- 버전관리는 properties에서 하기 때문에 변수처럼 사용하기 -->
+			<version>${javax.servlet.jsp-version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- javax.servlet/jstl 라이브러리 적용 위한 설정 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<!-- 버전관리는 properties에서 하기 때문에 변수처럼 사용하기 -->
+			<version>${javax.servlet.jsp.jstl-version}</version>
+		</dependency>
+
+		<!-- spring-webmvc 라이브러리 적용 위한 설정 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<!-- 버전관리는 properties에서 하기 때문에 변수처럼 사용하기 -->
+			<version>${org.springframework}</version>
+		</dependency>
+
+		<!-- resource 어노테이션 안먹혀서 추가함.. 요상하군... -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<!-- validation-api를 사용하기 위한 설정 -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+
+		<!-- hibernate-validator를 사용하기 위한 설정 -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.1.Final</version>
+		</dependency>
+
+
+		<!-- jar파일 사용하지 않고 라이브러리로 사용하기 -->
+		<!-- mariadb를 연결하기 위한 라이브러리로 jar파일 대신 -->
+		<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>2.7.4</version>
+		</dependency>
+		<!-- Spring JDBC -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.2.9.RELEASE</version>
+		</dependency>
+		<!-- Connection역할 -->
+		<!-- 트랙잭션 제어 역할 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+
+		<!-- MyBatis를 사용하기 위한 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis/3.5.7 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.7</version>
+		</dependency>
+
+		<!-- MyBatis-spring을 사용하기 위한 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring/2.0.6 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+
+		<!-- 어노테이션 사용을 위한 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<!-- aspectj사용을 위한 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.6</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Ajax 비동기 통신을 위한 jackson databind 라이브러리  -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.1</version>
+		</dependency>
+
+		<!-- json라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20210307</version>
+		</dependency>
+
+
+	</dependencies>
+</project>
